@@ -1,6 +1,7 @@
-define(["jquery", "core/str", "core/modal_factory"], function($, Str, ModalFactory) {
+define(["jquery", "core/str", "core/modal_factory", "core/templates"], function($, Str, ModalFactory, Template) {
     return {
         init: function() {
+
             Str.get_string('addresourceoractivity')
                 .then(function(str) {
                     var buttonHtml = '' +
@@ -9,7 +10,7 @@ define(["jquery", "core/str", "core/modal_factory"], function($, Str, ModalFacto
                     $('.section-modchooser-link').parent().append(buttonHtml);
 
                     var title = 'Add activty or resource'; // TODO, localise.
-                    var body = 'RESOURCES GO HERE';
+                    var body = '<div></div>';
 
                     return ModalFactory.create({
                         type: ModalFactory.types.DEFAULT,
@@ -21,7 +22,9 @@ define(["jquery", "core/str", "core/modal_factory"], function($, Str, ModalFacto
                 .then(function(modal) {
                     $('.alternative-modchooser').click(function() {
                         modal.show();
-
+                        var context = {};
+                        var modalBodyPromise = Template.render('local_activitychooser/modulechooser', context);
+                        modal.setBody(modalBodyPromise);
                     });
                 });
         }
