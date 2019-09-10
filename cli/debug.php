@@ -15,17 +15,26 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version details.
+ * Webservices for Usersynchronisation via TUGraz IdentityManagement (IDM)
  *
- * @package    local_activitychooser
- * @copyright  2019 Copyright
+ * @package    local_idm
+ * @category   webservices
+ * @author     Christian Ortner
+ * @copyright  2019 Educational Technologies, Graz, University of Technology
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die;
+use local_activitychooser\get_activities;
 
-$plugin->version   = 2019091002;
-$plugin->release   = '1.0';
-$plugin->maturity  = MATURITY_ALPHA;
-$plugin->requires  = 2017010100; // Moodle 2.7 release and upwards.
-$plugin->component = 'local_activitychooser';
+define('CLI_SCRIPT', true);
+
+require(__DIR__ . '/../../../config.php');
+
+global $USER, $COURSE;
+
+// just let moodle think admin is working in course with id 2
+$COURSE = get_course(2);
+$USER->id = 2;
+
+$activities = new get_activities();
+var_dump($activities->get_activities(0));
