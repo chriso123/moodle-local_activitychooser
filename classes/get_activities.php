@@ -29,7 +29,7 @@ class get_activities {
         $starredmodules = get_module_metadata($COURSE, $chosenstarred, $sectionnum);
 
         foreach ($starredmodules as $module) {
-            $mod                 = $this->get_module_information($module);
+            $mod                 = $this->get_module_information($module, $sectionnum);
             $retval['starred'][] = $mod;
         }
 
@@ -38,14 +38,15 @@ class get_activities {
             $acts[$activity->name] = $activity->name;
         }
 
-        $acts        = get_module_types_names();
-        $modules     = get_module_metadata($COURSE, $acts, $sectionnum);
+        $acts    = get_module_types_names();
+        $modules = get_module_metadata($COURSE, $acts, $sectionnum);
+        var_dump($modules);
         $recommended = get_config('local_activitychooser', 'recommended')
                 ? explode(',', get_config('local_activitychooser', 'recommended'))
                 : [];
 
         foreach ($modules as $module) {
-            $mod = $this->get_module_information($module);
+            $mod = $this->get_module_information($module, $sectionnum);
             $rec = false;
             foreach ($recommended as $value) {
                 if ($value == $mod['id']) {
@@ -63,7 +64,7 @@ class get_activities {
         return $retval;
     }
 
-    private function get_module_information($module) {
+    private function get_module_information($module, $sectionnum) {
         global $DB;
         return [
                 'id'    => $DB->get_field('modules', 'id', ['name' => $module->name]),
@@ -71,7 +72,7 @@ class get_activities {
                 'label' => get_string("modulename", "$module->name"),
                 'icon'  => $module->icon,
                 'help'  => $module->help,
-                'link'  => $module->link->out(),
+                'link'  => $module->link->out() . "&section=$sectionnum",
         ];
     }
 }
