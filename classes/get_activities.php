@@ -44,7 +44,7 @@ class get_activities {
         $modules = get_module_metadata($COURSE, $acts, $sectionnum);
 
         $recommended = get_config('local_activitychooser', 'recommended_sorted')
-                ? explode(',', get_config('local_activitychooser', 'recommended'))
+                ? explode(',', get_config('local_activitychooser', 'recommended_sorted'))
                 : [];
 
         foreach ($modules as $module) {

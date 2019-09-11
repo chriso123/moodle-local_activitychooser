@@ -64,7 +64,7 @@ class get_activities_test extends advanced_testcase {
 
         global $DB;
         // Workshop, folder, url and feedback are recommended
-        set_config('recommended', '7,8,20,22', 'local_activitychooser');
+        set_config('recommended_sorted', '7,20,22,8', 'local_activitychooser');
 
         $activities = new get_activities();
         $all        = $activities->get_activities(0);
