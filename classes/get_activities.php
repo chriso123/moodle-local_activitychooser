@@ -47,6 +47,9 @@ class get_activities {
                 ? explode(',', get_config('local_activitychooser', 'recommended_sorted'))
                 : [];
 
+
+
+        $tmp = [];
         foreach ($modules as $module) {
             $mod = $this->get_module_information($module, $sectionnum);
             $rec = false;
@@ -56,9 +59,18 @@ class get_activities {
                 }
             }
             if ($rec) {
-                $retval['recommended'][] = $mod;
+                $tmp[] = $mod;
             } else {
                 $retval['all'][] = $mod;
+            }
+        }
+
+        // Resort recommended because get_module_metadata ignores sort order and loads resources first.
+        foreach($recommended as $rec) {
+            foreach($tmp as $module) {
+                if($rec == $module['id']) {
+                    $retval['recommended'][] = $module;
+                }
             }
         }
 
