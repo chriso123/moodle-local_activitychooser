@@ -4,7 +4,7 @@ namespace local_activitychooser;
 
 class get_activities {
     public function get_activities($sectionnum = null) {
-        global $DB, $USER, $OUTPUT, $COURSE, $CFG, $PAGE;
+        global $DB, $USER, $COURSE, $CFG, $PAGE;
         require_once($CFG->dirroot . '/course/lib.php');
 
         $PAGE->set_context(\context_system::instance());
@@ -66,11 +66,12 @@ class get_activities {
     private function get_module_information($module) {
         global $DB;
         return [
-                'id'   => $DB->get_field('modules', 'id', ['name' => $module->name]),
-                'name' => $module->name,
-                'icon' => $module->icon,
-                'help' => $module->help,
-                'link' => $module->link->out(),
+                'id'    => $DB->get_field('modules', 'id', ['name' => $module->name]),
+                'name'  => $module->name,
+                'label' => get_string("modulename", "$module->name"),
+                'icon'  => $module->icon,
+                'help'  => $module->help,
+                'link'  => $module->link->out(),
         ];
     }
 }

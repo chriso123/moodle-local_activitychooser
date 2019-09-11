@@ -38,3 +38,4 @@ $USER->id = 2;
 
 $activities = new get_activities();
 $acts = $activities->get_activities(0);
+var_dump($acts);

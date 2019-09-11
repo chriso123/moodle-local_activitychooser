@@ -10,7 +10,6 @@ class toggle_starred_test extends advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         $this->setUser($user);
-        $item = new stdClass();
 
         $toggle = new toggle_starred();
         $toggle->toggle(1);
@@ -27,7 +26,6 @@ class toggle_starred_test extends advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         $this->setUser($user);
-        $item = new stdClass();
 
         $toggle = new toggle_starred();
         $toggle->toggle(1);
