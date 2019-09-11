@@ -4,8 +4,10 @@ namespace local_activitychooser;
 
 class get_activities {
     public function get_activities($sectionnum = null) {
-        global $DB, $USER, $OUTPUT, $COURSE, $CFG;
+        global $DB, $USER, $OUTPUT, $COURSE, $CFG, $PAGE;
         require_once($CFG->dirroot . '/course/lib.php');
+
+        $PAGE->set_context(\context_system::instance());
 
         $retval = [
                 'starred'     => [],
