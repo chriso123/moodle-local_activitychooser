@@ -11,4 +11,8 @@ if ($hassiteconfig) {
                                                     get_string('enablenonedit', 'local_activitychooser'),
                                                     get_string('enablenonedit_description', 'local_activitychooser'),
                                                     0));
+
+    $settings->add(new admin_setting_configmultiselect_modules('local_activitychooser/recommended',
+                                                               get_string('recommended', 'local_activitychooser'),
+                                                               get_string('recommended_description', 'local_activitychooser')));
 }

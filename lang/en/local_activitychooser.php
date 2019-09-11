@@ -26,3 +26,5 @@
 $string['pluginname'] = 'Enhanced activity chooser';
 $string['enablenonedit'] = 'Enable in non editmode';
 $string['enablenonedit_description'] = 'Beside the default usage of the activity chooser in course edit mode, the activity chooser can also be used on the non-editing view of the course. Alas for editing activites, the edit mode has still to be activated.';
+$string['recommended'] = 'Recommended activities';
+$string['recommended_description'] = 'Selected activites will be put in the recommended section of the activity chooser';
