@@ -40,7 +40,7 @@ class get_activities {
 
         $acts    = get_module_types_names();
         $modules = get_module_metadata($COURSE, $acts, $sectionnum);
-        var_dump($modules);
+        
         $recommended = get_config('local_activitychooser', 'recommended')
                 ? explode(',', get_config('local_activitychooser', 'recommended'))
                 : [];
