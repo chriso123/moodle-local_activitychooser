@@ -43,7 +43,7 @@ class get_activities {
         $acts    = get_module_types_names();
         $modules = get_module_metadata($COURSE, $acts, $sectionnum);
 
-        $recommended = get_config('local_activitychooser', 'recommended')
+        $recommended = get_config('local_activitychooser', 'recommended_sorted')
                 ? explode(',', get_config('local_activitychooser', 'recommended'))
                 : [];
 
@@ -60,7 +60,6 @@ class get_activities {
             } else {
                 $retval['all'][] = $mod;
             }
-
         }
 
         return $retval;

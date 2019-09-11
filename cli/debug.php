@@ -37,5 +37,5 @@ $COURSE = get_course(2);
 $USER->id = 2;
 
 $activities = new get_activities();
-$acts = $activities->get_activities(0);
+$acts = $activities->get_activities(5);
 var_dump($acts);

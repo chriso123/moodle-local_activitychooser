@@ -1,9 +1,13 @@
 <?php
 
+use local_activitychooser\admin_setting_multiselect_sorted;
+
 defined('MOODLE_INTERNAL') || die();
-global $ADMIN;
+global $ADMIN, $PAGE;
 
 if ($hassiteconfig) {
+    $PAGE->requires->js_call_amd('local_activitychooser/setting_configmultiselect', 'init');
+
     $settings = new admin_settingpage('local_activitychooser', get_string('pluginname', 'local_activitychooser'));
     $ADMIN->add('localplugins', $settings);
 
@@ -12,7 +16,8 @@ if ($hassiteconfig) {
                                                     get_string('enablenonedit_description', 'local_activitychooser'),
                                                     0));
 
-    $settings->add(new admin_setting_configmultiselect_modules('local_activitychooser/recommended',
-                                                               get_string('recommended', 'local_activitychooser'),
-                                                               get_string('recommended_description', 'local_activitychooser')));
+    $modules = get_module_types_names();
+    $settings->add(new admin_setting_multiselect_sorted('local_activitychooser/recommended_sorted',
+                                                        get_string('recommended', 'local_activitychooser'),
+                                                        get_string('recommended_description', 'local_activitychooser')));
 }
