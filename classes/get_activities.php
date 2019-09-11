@@ -2,6 +2,8 @@
 
 namespace local_activitychooser;
 
+defined('MOODLE_INTERNAL') || die();
+
 class get_activities {
     public function get_activities($sectionnum = null) {
         global $DB, $USER, $COURSE, $CFG, $PAGE;
@@ -40,7 +42,7 @@ class get_activities {
 
         $acts    = get_module_types_names();
         $modules = get_module_metadata($COURSE, $acts, $sectionnum);
-        
+
         $recommended = get_config('local_activitychooser', 'recommended')
                 ? explode(',', get_config('local_activitychooser', 'recommended'))
                 : [];
@@ -65,14 +67,16 @@ class get_activities {
     }
 
     private function get_module_information($module, $sectionnum) {
-        global $DB;
+        global $DB, $USER;
+        $activityid = $DB->get_field('modules', 'id', ['name' => $module->name]);
         return [
-                'id'    => $DB->get_field('modules', 'id', ['name' => $module->name]),
+                'id'    => $activityid,
                 'name'  => $module->name,
                 'label' => get_string("modulename", "$module->name"),
                 'icon'  => $module->icon,
                 'help'  => $module->help,
                 'link'  => $module->link->out() . "&section=$sectionnum",
+                'starred' => $DB->record_exists('local_activitychooserstarred', ['userid' => $USER->id, 'activityid' => $activityid])
         ];
     }
 }
