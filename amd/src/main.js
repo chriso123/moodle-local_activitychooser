@@ -20,6 +20,15 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax
                     })
                     .then(function(body) {
                         mainModal.setBody(body);
+
+                        // Tooltip code not working.
+                        /*
+                        $('.help-text').each(function(el) {
+                            new Tooltip(el, {
+                                placement: 'bottom',
+                                title: $(el).data('help')
+                            });
+                        });*/
                     });
             };
 
@@ -92,7 +101,12 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax
             // Click handler for favouriting.
             $("body").on("click", ".activitychooser-modal-body .row .toggle-favourite", function() {
                 var id = ($(this).data('id'));
+                $(this).addClass('spinning');
                 moduleToggleFavourited(id);
+            });
+
+            $("body").on("click", ".activitychooser-modal-body .row .help-text", function() {
+                $(this).toggleClass('help-visible');
             });
         }
     };

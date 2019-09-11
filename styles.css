@@ -15,7 +15,11 @@
     font-size: 2em;
     width: 1em;
     height: 1em;
-    transition: all .2s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+
+.activitychooser-modal-body .icon:hover {
+    transform: scale(1.5);
 }
 
 @media (max-width: 450px) {
@@ -41,7 +45,7 @@
     transition: all .1s ease-in-out;
 }
 
-.activitychooser-modal-body .toggle-favourite:hover {
+.activitychooser-modal-body .toggle-favourite:not(.spinning):hover {
     transform: scale(1.5);
 }
 
@@ -59,4 +63,30 @@
 
 .activitychooser-modal-body .card.starred, .favourites .card{
     background-color: #fffaf0;
+}
+
+@-moz-keyframes ajax-spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes ajax-spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes ajax-spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+.activitychooser-modal-body .toggle-favourite.spinning {
+    -webkit-animation:ajax-spin 3s linear infinite;
+    -moz-animation:ajax-spin 3s linear infinite;
+    animation:ajax-spin 3s linear infinite;
+}
+
+.activitychooser-modal-body .full-help-text {
+    display: none;
+}
+
+.activitychooser-modal-body .help-visible .short-help-text {
+    display: none;
+}
+
+.activitychooser-modal-body .help-visible .full-help-text {
+    display: block;
+}
+
+.activitychooser-modal-body .help-text:hover {
+    cursor: pointer;
 }
