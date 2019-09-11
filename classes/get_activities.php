@@ -18,7 +18,7 @@ class get_activities {
         ];
 
         $table      = 'local_activitychooserstarred';
-        $starred    = $DB->get_records($table, ['userid' => $USER->id]);
+        $starred    = $DB->get_records($table, ['userid' => $USER->id], 'sortorder ASC');
         $activities = $DB->get_records('modules');
 
         $chosenstarred = [];
@@ -30,10 +30,15 @@ class get_activities {
 
         $starredmodules = get_module_metadata($COURSE, $chosenstarred, $sectionnum);
 
-        foreach ($starredmodules as $module) {
-            $mod                 = $this->get_module_information($module, $sectionnum);
-            $retval['starred'][] = $mod;
+        foreach($starred as $star) {
+            foreach ($starredmodules as $module) {
+                $mod                 = $this->get_module_information($module, $sectionnum);
+                if($star->activityid == $mod['id']) {
+                    $retval['starred'][] = $mod;
+                }
+            }
         }
+
 
         $acts = [];
         foreach ($activities as $id => $activity) {
