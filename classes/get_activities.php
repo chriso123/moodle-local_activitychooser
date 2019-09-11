@@ -27,12 +27,7 @@ class get_activities {
         $starredmodules = get_module_metadata($COURSE, $chosenstarred, $sectionnum);
 
         foreach ($starredmodules as $module) {
-            $mod = [
-                    'id' => $DB->get_field('modules', 'id', ['name' => $module->name]),
-                    'name' => $module->name,
-                    'icon' => $module->icon,
-                    'help' => $module->help,
-            ];
+            $mod = $this->get_module_information($module);
             $retval['starred'][] = $mod;
         }
 
@@ -47,15 +42,21 @@ class get_activities {
         foreach ($modules as $module) {
             // TODO recommended is ignored at this moment
             // TODO filter recomended away from all so that an element is either recommended or in all
-            $mod = [
-                    'id' => $DB->get_field('modules', 'id', ['name' => $module->name]),
-                    'name' => $module->name,
-                    'icon' => $module->icon,
-                    'help' => $module->help,
-            ];
+            $mod = $this->get_module_information($module);
             $retval['all'][] = $mod;
         }
 
         return $retval;
+    }
+
+    private function get_module_information($module) {
+        global $DB;
+        return [
+                'id' => $DB->get_field('modules', 'id', ['name' => $module->name]),
+                'name' => $module->name,
+                'icon' => $module->icon,
+                'help' => $module->help,
+                'link' => $module->link->out(),
+        ];
     }
 }
