@@ -15,6 +15,13 @@ $functions = [
                 'type'        => 'read',
                 'ajax'        => true,
         ],
+        'local_activitychooser_change_starred_sortorder'  => [
+                'classname'   => 'local_activitychooser\\ajax\\change_starred_sortorder',
+                'methodname'  => 'service',
+                'description' => 'Reorder an activity in favourites list',
+                'type'        => 'write',
+                'ajax'        => true,
+        ],
 ];
 
 // During the plugin installation/upgrade, Moodle installs these services as pre-build services.
