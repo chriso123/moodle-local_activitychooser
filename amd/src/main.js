@@ -1,15 +1,69 @@
-define(["jquery", "core/str", "core/modal_factory", "core/templates"], function($, Str, ModalFactory, Template) {
+define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax"], function($, Str, ModalFactory, Template, Ajax) {
     return {
         init: function() {
+            var currentSection = 0;
+            var mainModal;
 
-            Str.get_string('addresourceoractivity')
-                .then(function(str) {
+            /**
+             * Add or remove a specific moduleId from favourited items.
+             * @param moduleId
+             */
+            var moduleToggleFavourited = function(moduleId) {
+                return Ajax.call([
+                    {methodname: "local_activitychooser_toggle_starred", args:{"activityid": moduleId}}
+                ])[0]
+                    .then(function() {
+                        return getTemplateContext(currentSection);
+                    })
+                    .then(function(context) {
+                        return Template.render('local_activitychooser/modulechooser', context);
+                    })
+                    .then(function(body) {
+                        mainModal.setBody(body);
+                    });
+            };
+
+            var getTemplateContext = function(sectionNum) {
+                return Ajax.call([
+                    {methodname: "local_activitychooser_get_activites", args:{"sectionnum": sectionNum}}
+                ])[0].then(function(data) {
+                    var convertItemsToRows = function(items, maxCells) {
+                        var rows = [];
+                        var row = [];
+                        items.forEach(function(f) {
+                            if (row.length < maxCells) {
+                                row.push(f);
+                            } else {
+                                rows.push(row);
+                                row = [f];
+                            }
+                        });
+                        if (row.length > 0) {
+                            rows.push(row);
+                        }
+                        return rows;
+                    };
+                    var data = JSON.parse(data);
+
+                    var allRows = convertItemsToRows(data.all, 2);
+                    var recommendedRows = convertItemsToRows(data.recommended, 2);
+                    var starredRows = convertItemsToRows(data.starred, 4);
+                    return {
+                        allRows: allRows,
+                        recommendedRows: recommendedRows,
+                        starredRows: starredRows
+                    };
+                });
+            };
+
+            Str.get_string("addresourceoractivity")
+                .then(function(addStr) {
                     var buttonHtml = '' +
                         '<button class="alternative-modchooser btn link">' +
-                        '<i class="icon fa fa-plus fa-fw "></i>' + str + '</button>';
+                        '<i class="icon fa fa-plus fa-fw "></i>' + addStr + '</button>';
                     $('.section-modchooser-link').parent().append(buttonHtml);
 
-                    var title = 'Add activty or resource'; // TODO, localise.
+                    var title = addStr;
                     var body = '<div></div>';
 
                     return ModalFactory.create({
@@ -20,13 +74,26 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates"], function(
                     });
                 })
                 .then(function(modal) {
+                    mainModal = modal;
                     $('.alternative-modchooser').click(function() {
+                        var sectionNum = $(this).closest("li.section").attr('id').split('-')[1];
                         modal.show();
-                        var context = {};
-                        var modalBodyPromise = Template.render('local_activitychooser/modulechooser', context);
-                        modal.setBody(modalBodyPromise);
+
+                        currentSection = sectionNum;
+
+                        getTemplateContext(sectionNum)
+                            .then(function(context) {
+                                var modalBodyPromise = Template.render('local_activitychooser/modulechooser', context);
+                                modal.setBody(modalBodyPromise);
+                            });
                     });
                 });
+
+            // Click handler for favouriting.
+            $("body").on("click", ".activitychooser-modal-body .row .toggle-favourite", function() {
+                var id = ($(this).data('id'));
+                moduleToggleFavourited(id);
+            });
         }
     };
 });

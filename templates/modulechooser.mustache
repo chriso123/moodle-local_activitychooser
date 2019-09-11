@@ -1,9 +1,78 @@
-<div>
-    <h2>Favourites</h2>
-</div>
-<div>
-    <h2>Recommended</h2>
-</div>
-<div>
-    <h2>All</h2>
+<div class="activitychooser-modal-body">
+    {{#starredRows.length}}
+        <div class="container favourites">
+            {{#starredRows}}
+            <div class="row">
+                {{#.}}
+                    <div class="col-3">
+                        <a class="mx-auto mt-3" href="{{{link}}}">
+                            <div class="card rounded-0" style="width: 100%">
+                                <div class="mx-auto mt-3">
+                                    {{{icon}}}
+                                </div>
+                                <div class="card-body py-2">
+                                    <h6 class="card-title">{{label}}</h6>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {{/.}}
+            </div>
+            {{/starredRows}}
+        </div>
+        <hr/>
+    {{/starredRows.length}}
+
+
+    {{#recommendedRows.length}}
+        <div class="container">
+            <h2>Recommended</h2>
+            {{#recommendedRows}}
+                <!--TODO WE NEED A PARTIAL FOR THIS AS recommendedRows and AllRows use the same markup -->
+                <div class="row">
+                    {{#.}}
+                        <div data-id="{{id}}" data-name="{{name}}" class="col-6">
+                            <div class="card {{#starred}}starred{{/starred}}" style="width: 100%">
+                                <div class="card-body media">
+                                    <a href="{{{link}}}">{{{icon}}}</a>
+                                    <div class="media-body">
+                                        <!--TODO - localise aria-label -->
+                                        <i role="button" aria-label="Add {{label}} to favourites" class="fa {{#starred}}fa-star{{/starred}}{{^starred}}fa-star-o{{/starred}} pull-right toggle-favourite" data-id="{{id}}"></i>
+                                        <h5 class="card-title">{{label}}</h5>
+                                        <p class="card-text">{{#shortentext}}60, {{{help}}} {{/shortentext}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{/.}}
+                </div>
+            {{/recommendedRows}}
+        </div>
+        <hr/>
+    {{/recommendedRows.length}}
+
+    {{#allRows.length}}
+        <div class="container">
+            <h2>All</h2>
+            {{#allRows}}
+                <div class="row">
+                    {{#.}}
+                        <div data-id="{{id}}" data-name="{{name}}" class="col-6">
+                            <div class="card" style="width: 100%">
+                                <div class="card-body media">
+                                    <a href="{{{link}}}">{{{icon}}}</a>
+                                    <div class="media-body">
+                                        <!--TODO - localise aria-label -->
+                                        <i role="button" aria-label="Add {{label}} to favourites" class="fa {{#starred}}fa-star{{/starred}}{{^starred}}fa-star-o{{/starred}} pull-right toggle-favourite" data-id="{{id}}"></i>
+                                        <h5 class="card-title">{{label}}</h5>
+                                        <p class="card-text">{{#shortentext}}60, {{{help}}} {{/shortentext}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{/.}}
+                </div>
+            {{/allRows}}
+        </div>
+    {{/allRows.length}}
 </div>

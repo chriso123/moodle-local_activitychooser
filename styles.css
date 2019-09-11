@@ -1,3 +1,62 @@
 .section-modchooser-link {
     display: none !important;
 }
+
+.activitychooser-modal-body .row {
+    margin-bottom: 1em;
+}
+
+.activitychooser-modal-body .favourites .card-title {
+    text-align: center;
+    font-size:0.75em;
+}
+
+.activitychooser-modal-body .icon {
+    font-size: 2em;
+    width: 1em;
+    height: 1em;
+    transition: all .2s ease-in-out;
+}
+
+@media (max-width: 450px) {
+    .activitychooser-modal-body .favourites .card-title {
+        display: none;
+    }
+}
+
+.activitychooser-modal-body .container.favourites a:hover .card {
+    background-color: #f9f9f9;
+}
+
+.activitychooser-modal-body .container.favourites a:hover {
+    text-decoration: none;
+}
+
+.activitychooser-modal-body .toggle-favourite[class*="fa-star"] {
+    font-size: 1.35em;
+    font-weight: bold;
+}
+
+.activitychooser-modal-body .toggle-favourite {
+    transition: all .1s ease-in-out;
+}
+
+.activitychooser-modal-body .toggle-favourite:hover {
+    transform: scale(1.5);
+}
+
+.activitychooser-modal-body .toggle-favourite.fa-star-o {
+    color: #bfbfbf;
+}
+
+.activitychooser-modal-body .toggle-favourite.fa-star {
+    color: #ffc107;
+}
+
+.activitychooser-modal-body .card.starred{
+    background-color: #eee;
+}
+
+.activitychooser-modal-body .card.starred, .favourites .card{
+    background-color: #fffaf0;
+}
