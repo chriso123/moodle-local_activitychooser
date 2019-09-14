@@ -30,4 +30,4 @@ $string['recommended'] = 'Recommended activities';
 $string['recommended_description'] = 'Selected activites will be put in the recommended section of the activity chooser';
 $string['all'] = 'All';
 $string['recommendedshort'] = 'Recommended';
-$string['addactivity'] = 'Add activity';
+$string['addactivity'] = 'Add an activity';
