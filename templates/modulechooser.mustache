@@ -1,4 +1,4 @@
-<div class="activitychooser-modal-body">
+<div class="activitychooser-modal-body {{#recommendedRows.length}}has-recommended{{/recommendedRows.length}} {{#starredRows.length}}has-starred{{/starredRows.length}}">
     {{#starredRows.length}}
         <div class="container favourites">
             {{#starredRows}}
@@ -6,7 +6,7 @@
                 {{#.}}
                     <div class="col-3">
                         <a class="mx-auto mt-3" href="{{{link}}}">
-                            <div class="card rounded-0" style="width: 100%">
+                            <div class="card" style="width: 100%">
                                 <!--<i role="button" aria-label="Toggle starred for {{label}}" class="fa {{#starred}}fa-star{{/starred}}{{^starred}}fa-star-o{{/starred}} pull-right toggle-favourite" data-id="{{id}}"></i>-->
                                 <div class="mx-auto mt-3">
                                     {{{icon}}}
@@ -27,27 +27,11 @@
 
     {{#recommendedRows.length}}
         <div class="container">
-            <h2>Recommended</h2>
+            <h2>{{#str}}recommendedshort, local_activitychooser{{/str}}</h2>
             {{#recommendedRows}}
-                <!--TODO WE NEED A PARTIAL FOR THIS AS recommendedRows and AllRows use the same markup -->
                 <div class="row">
                     {{#.}}
-                        <div data-id="{{id}}" data-name="{{name}}" class="col-6">
-                            <div class="card {{#starred}}starred{{/starred}}" style="width: 100%">
-                                <div class="card-body media">
-                                    <a href="{{{link}}}">{{{icon}}}</a>
-                                    <div class="media-body">
-                                        <!--TODO - localise aria-label -->
-                                        <i role="button" aria-label="Toggle starred for {{label}}" class="fa {{#starred}}fa-star{{/starred}}{{^starred}}fa-star-o{{/starred}} pull-right toggle-favourite" data-id="{{id}}"></i>
-                                        <a href="{{{link}}}"><h5 class="card-title">{{label}}</h5></a>
-                                        <div class="card-text help-text">
-                                            <div class="short-help-text">{{#shortentext}}60, {{{help}}} {{/shortentext}}</div>
-                                            <div class="full-help-text">{{{help}}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{> local_activitychooser/activity_media_card }}
                     {{/.}}
                 </div>
             {{/recommendedRows}}
@@ -56,30 +40,32 @@
     {{/recommendedRows.length}}
 
     {{#allRows.length}}
-        <div class="container">
-            <h2>All</h2>
+    <div class="container">
+        {{#allExpandable}}
+            <a data-toggle="collapse" href="#collapsed-all" aria-expanded="false" aria-controls="collapsed-all">
+                <h2><span class="fa fa-toggle-right"></span><span class="fa fa-toggle-down"></span><span class="mx-1">{{#str}}all, local_activitychooser{{/str}}</span></h2>
+            </a>
+            <div class="collapse" id="collapsed-all">
+                {{#allRows}}
+                    <div class="row">
+                        {{#.}}
+                            {{> local_activitychooser/activity_media_card }}
+                        {{/.}}
+                    </div>
+                {{/allRows}}
+            </div>
+        {{/allExpandable}}
+
+        {{^allExpandable}}
+            <h2>{{#str}}all, local_activitychooser{{/str}}</h2>
             {{#allRows}}
                 <div class="row">
                     {{#.}}
-                        <div data-id="{{id}}" data-name="{{name}}" class="col-6">
-                            <div class="card {{#starred}}starred{{/starred}}" style="width: 100%">
-                                <div class="card-body media">
-                                    <a href="{{{link}}}">{{{icon}}}</a>
-                                    <div class="media-body">
-                                        <!--TODO - localise aria-label -->
-                                        <i role="button" aria-label="Toggle starred for {{label}}" class="fa {{#starred}}fa-star{{/starred}}{{^starred}}fa-star-o{{/starred}} pull-right toggle-favourite" data-id="{{id}}"></i>
-                                        <a href="{{{link}}}"><h5 class="card-title">{{label}}</h5></a>
-                                        <div class="card-text help-text">
-                                            <div class="short-help-text">{{#shortentext}}60, {{{help}}} {{/shortentext}}</div>
-                                            <div class="full-help-text">{{{help}}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {{> local_activitychooser/activity_media_card }}
                     {{/.}}
                 </div>
             {{/allRows}}
-        </div>
+        {{/allExpandable}}
+    </div>
     {{/allRows.length}}
 </div>

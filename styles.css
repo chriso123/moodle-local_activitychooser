@@ -57,12 +57,14 @@
     color: #ffc107;
 }
 
-.activitychooser-modal-body .card.starred{
-    background-color: #eee;
+.favourites .card {
+    border-width: 0 0 2px 0;
+    border-radius: 2.5px;
 }
 
-.activitychooser-modal-body .card.starred, .favourites .card{
-    background-color: #fffaf0;
+.activitychooser-modal-body .card.starred,
+.favourites .card{
+    border-color: #ffe0a0;
 }
 
 @-moz-keyframes ajax-spin { 100% { -moz-transform: rotate(360deg); } }
@@ -89,4 +91,20 @@
 
 .activitychooser-modal-body .help-text:hover {
     cursor: pointer;
+}
+
+.activitychooser-modal-body .container h2 {
+    font-size: 1.2rem;
+}
+
+/* Make sure toggles hide the appropriate icon according to state */
+.activitychooser-modal-body a[data-toggle="collapse"][aria-expanded="false"] span.fa-toggle-down {
+    display: none;
+}
+.activitychooser-modal-body a[data-toggle="collapse"][aria-expanded="true"] span.fa-toggle-right {
+    display: none;
+}
+
+.activitychooser-modal-body:not(.has-recommended) {
+
 }

@@ -60,12 +60,13 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax
                     return {
                         allRows: allRows,
                         recommendedRows: recommendedRows,
-                        starredRows: starredRows
+                        starredRows: starredRows,
+                        allExpandable: recommendedRows.length || starredRows.length
                     };
                 });
             };
 
-            Str.get_string("addresourceoractivity")
+            Str.get_string("addactivity", "local_activitychooser")
                 .then(function(addStr) {
                     var buttonHtml = '' +
                         '<button class="alternative-modchooser btn link">' +
