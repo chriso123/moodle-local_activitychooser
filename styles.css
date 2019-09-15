@@ -30,6 +30,7 @@
 
 .activitychooser-modal-body .container.favourites a:hover .card {
     background-color: #f9f9f9;
+    border-color: #ec3;
 }
 
 .activitychooser-modal-body .container.favourites a:hover {
@@ -97,14 +98,14 @@
     font-size: 1.2rem;
 }
 
+span.expand-ico, span.collapse-ico {
+    min-width: 1.25rem;
+}
+
 /* Make sure toggles hide the appropriate icon according to state */
-.activitychooser-modal-body a[data-toggle="collapse"][aria-expanded="false"] span.fa-toggle-down {
+.activitychooser-modal-body a[data-toggle="collapse"][aria-expanded="false"] span.collapse-ico {
     display: none;
 }
-.activitychooser-modal-body a[data-toggle="collapse"][aria-expanded="true"] span.fa-toggle-right {
+.activitychooser-modal-body a[data-toggle="collapse"][aria-expanded="true"] span.expand-ico {
     display: none;
-}
-
-.activitychooser-modal-body:not(.has-recommended) {
-
 }
