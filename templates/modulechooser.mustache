@@ -45,7 +45,7 @@
             <a data-toggle="collapse" href="#collapsed-all" aria-expanded="false" aria-controls="collapsed-all">
                 <h2><span class="fa fa-angle-right expand-ico"></span><span class="fa fa-angle-down collapse-ico"></span><span class="mx-1">{{#str}}all, local_activitychooser{{/str}}</span></h2>
             </a>
-            <div class="collapse" id="collapsed-all">
+            <div class="collapse {{#allExpanded}}show{{/allExpanded}}" id="collapsed-all">
                 {{#allRows}}
                     <div class="row">
                         {{#.}}

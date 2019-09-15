@@ -20,15 +20,6 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax
                     })
                     .then(function(body) {
                         mainModal.setBody(body);
-
-                        // Tooltip code not working.
-                        /*
-                        $('.help-text').each(function(el) {
-                            new Tooltip(el, {
-                                placement: 'bottom',
-                                title: $(el).data('help')
-                            });
-                        });*/
                     });
             };
 
@@ -57,11 +48,15 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax
                     var allRows = convertItemsToRows(data.all, 2);
                     var recommendedRows = convertItemsToRows(data.recommended, 2);
                     var starredRows = convertItemsToRows(data.starred, 4);
+
+                    var allExpanded = !!$('#collapsed-all').hasClass('show');
+
                     return {
                         allRows: allRows,
                         recommendedRows: recommendedRows,
                         starredRows: starredRows,
-                        allExpandable: recommendedRows.length || starredRows.length
+                        allExpandable: recommendedRows.length || starredRows.length,
+                        allExpanded: allExpanded
                     };
                 });
             };
