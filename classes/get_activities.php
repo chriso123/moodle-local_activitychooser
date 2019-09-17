@@ -19,7 +19,7 @@ class get_activities {
 
         $table      = 'local_activitychooserstarred';
         $starred    = $DB->get_records($table, ['userid' => $USER->id], 'sortorder ASC');
-        $activities = $DB->get_records('modules');
+        $activities = $DB->get_records('modules', [], 'id ASC');
 
         $chosenstarred = [];
 
@@ -63,7 +63,7 @@ class get_activities {
             if ($rec) {
                 $tmp[] = $mod;
             } else {
-                $retval['all'][] = $mod;
+                $retval['all'][$mod['id']] = $mod;
             }
         }
 
@@ -75,6 +75,8 @@ class get_activities {
                 }
             }
         }
+
+        sort($retval['all']);
 
         return $retval;
     }

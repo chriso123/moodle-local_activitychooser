@@ -57,8 +57,6 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax
                         allExpandable: recommendedRows.length || starredRows.length,
                         allExpanded: allExpanded
                     };
-                }).fail(function(data) {
-                    window.console.log(data);
                 });
             };
 
