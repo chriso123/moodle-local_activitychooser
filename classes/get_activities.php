@@ -30,15 +30,14 @@ class get_activities {
 
         $starredmodules = get_module_metadata($COURSE, $chosenstarred, $sectionnum);
 
-        foreach($starred as $star) {
+        foreach ($starred as $star) {
             foreach ($starredmodules as $module) {
-                $mod                 = $this->get_module_information($module, $sectionnum);
-                if($star->activityid == $mod['id']) {
+                $mod = $this->get_module_information($module, $sectionnum);
+                if ($star->activityid == $mod['id']) {
                     $retval['starred'][] = $mod;
                 }
             }
         }
-
 
         $acts = [];
         foreach ($activities as $id => $activity) {
@@ -51,8 +50,6 @@ class get_activities {
         $recommended = get_config('local_activitychooser', 'recommended_sorted')
                 ? explode(',', get_config('local_activitychooser', 'recommended_sorted'))
                 : [];
-
-
 
         $tmp = [];
         foreach ($modules as $module) {
@@ -71,9 +68,9 @@ class get_activities {
         }
 
         // Resort recommended because get_module_metadata ignores sort order and loads resources first.
-        foreach($recommended as $rec) {
-            foreach($tmp as $module) {
-                if($rec == $module['id']) {
+        foreach ($recommended as $rec) {
+            foreach ($tmp as $module) {
+                if ($rec == $module['id']) {
                     $retval['recommended'][] = $module;
                 }
             }
@@ -86,13 +83,14 @@ class get_activities {
         global $DB, $USER;
         $activityid = $DB->get_field('modules', 'id', ['name' => $module->name]);
         return [
-                'id'    => $activityid,
-                'name'  => $module->name,
-                'label' => get_string("modulename", "$module->name"),
-                'icon'  => $module->icon,
-                'help'  => $module->help,
-                'link'  => $module->link->out() . "&section=$sectionnum",
-                'starred' => $DB->record_exists('local_activitychooserstarred', ['userid' => $USER->id, 'activityid' => $activityid])
+                'id'      => $activityid,
+                'name'    => $module->name,
+                'label'   => get_string("modulename", "$module->name"),
+                'icon'    => $module->icon,
+                'help'    => $module->help,
+                'link'    => $module->link->out() . "&section=$sectionnum",
+                'starred' => $DB->record_exists('local_activitychooserstarred',
+                                                ['userid' => $USER->id, 'activityid' => $activityid])
         ];
     }
 }

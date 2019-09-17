@@ -43,7 +43,6 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax
                         }
                         return rows;
                     };
-                    var data = JSON.parse(data);
 
                     var allRows = convertItemsToRows(data.all, 2);
                     var recommendedRows = convertItemsToRows(data.recommended, 2);
@@ -58,6 +57,8 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax
                         allExpandable: recommendedRows.length || starredRows.length,
                         allExpanded: allExpanded
                     };
+                }).fail(function(data) {
+                    window.console.log(data);
                 });
             };
 
