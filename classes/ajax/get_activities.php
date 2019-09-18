@@ -5,9 +5,10 @@ namespace local_activitychooser\ajax;
 class get_activities extends \external_api {
     public static function service_parameters() {
         return new \external_function_parameters(
-                [
-                        'sectionnum' => new \external_value(PARAM_INT, 'Section id', VALUE_OPTIONAL),
-                ]
+            [
+                'course' => new \external_value(PARAM_INT, 'Course id', VALUE_REQUIRED),
+                'sectionnum' => new \external_value(PARAM_INT, 'Section id', VALUE_OPTIONAL)
+            ]
         );
     }
 
@@ -18,13 +19,6 @@ class get_activities extends \external_api {
                         'recommended' => self::return_value_structure(),
                         'all'         => self::return_value_structure(),
                 ]);
-    }
-
-    public static function service($sectionnum) {
-        $params = self::validate_parameters(self::service_parameters(), ['sectionnum' => $sectionnum]);
-
-        $activites = new \local_activitychooser\get_activities();
-        return $activites->get_activities($params['sectionnum']);
     }
 
     private static function return_value_structure() {
@@ -41,5 +35,15 @@ class get_activities extends \external_api {
                         ]
                 )
         );
+    }
+
+    public static function service($course, $sectionnum) {
+        $params  = self::validate_parameters(self::service_parameters(), [
+            'course' => $course,
+            'sectionnum' => $sectionnum
+        ]);
+
+        $activites = new \local_activitychooser\get_activities();
+        return json_encode($activites->get_activities($params['sectionnum'], $params['course']));
     }
 }

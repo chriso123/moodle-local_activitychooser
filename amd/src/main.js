@@ -24,8 +24,12 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax
             };
 
             var getTemplateContext = function(sectionNum) {
+                var course = document.body.className.match(/course-(\d+)/)[1];
                 return Ajax.call([
-                    {methodname: "local_activitychooser_get_activites", args:{"sectionnum": sectionNum}}
+                    {
+                        methodname: "local_activitychooser_get_activites",
+                        args:{"sectionnum": sectionNum, "course": course}
+                    }
                 ])[0].then(function(data) {
                     var convertItemsToRows = function(items, maxCells) {
                         var rows = [];

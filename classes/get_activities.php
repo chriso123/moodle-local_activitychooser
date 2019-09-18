@@ -5,9 +5,11 @@ namespace local_activitychooser;
 defined('MOODLE_INTERNAL') || die();
 
 class get_activities {
-    public function get_activities($sectionnum = null) {
+    public function get_activities($sectionnum = null, $courseid = null) {
         global $DB, $USER, $COURSE, $CFG, $PAGE;
         require_once($CFG->dirroot . '/course/lib.php');
+
+        $course = $courseid !== null ? get_course($courseid) :  $COURSE;
 
         $PAGE->set_context(\context_system::instance());
 
@@ -28,7 +30,7 @@ class get_activities {
             $chosenstarred[$name] = $name;
         }
 
-        $starredmodules = get_module_metadata($COURSE, $chosenstarred, $sectionnum);
+        $starredmodules = get_module_metadata($course, $chosenstarred, $sectionnum);
 
         foreach ($starred as $star) {
             foreach ($starredmodules as $module) {
@@ -45,7 +47,7 @@ class get_activities {
         }
 
         $acts    = get_module_types_names();
-        $modules = get_module_metadata($COURSE, $acts, $sectionnum);
+        $modules = get_module_metadata($course, $acts, $sectionnum);
 
         $recommended = get_config('local_activitychooser', 'recommended_sorted')
                 ? explode(',', get_config('local_activitychooser', 'recommended_sorted'))
