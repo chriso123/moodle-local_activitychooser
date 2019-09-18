@@ -44,6 +44,6 @@ class get_activities extends \external_api {
         ]);
 
         $activites = new \local_activitychooser\get_activities();
-        return json_encode($activites->get_activities($params['sectionnum'], $params['course']));
+        return $activites->get_activities($params['sectionnum'], $params['course']);
     }
 }
