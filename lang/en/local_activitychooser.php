@@ -31,3 +31,5 @@ $string['recommended_description'] = 'Selected activites will be put in the reco
 $string['all'] = 'All';
 $string['recommendedshort'] = 'Recommended';
 $string['addactivity'] = 'Add an activity';
+$string['enable'] = 'Enable';
+$string['enable_description'] = 'Enable this custom activity chooser';

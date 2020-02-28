@@ -1,68 +1,68 @@
-.section-modchooser-link {
+body.activitychooser-enabled .section-modchooser-link {
     display: none !important;
 }
 
-.activitychooser-modal-body .row {
+body.activitychooser-enabled .activitychooser-modal-body .row {
     margin-bottom: 1em;
 }
 
-.activitychooser-modal-body .favourites .card-title {
+body.activitychooser-enabled .activitychooser-modal-body .favourites .card-title {
     text-align: center;
     font-size: 0.75em;
 }
 
-.activitychooser-modal-body .icon {
+body.activitychooser-enabled .activitychooser-modal-body .icon {
     font-size: 2em;
     width: 1em;
     height: 1em;
     transition: all .1s ease-in-out;
 }
 
-.activitychooser-modal-body .icon:hover {
+body.activitychooser-enabled .activitychooser-modal-body .icon:hover {
     transform: scale(1.5);
 }
 
 @media (max-width: 450px) {
-    .activitychooser-modal-body .favourites .card-title {
+    body.activitychooser-enabled .activitychooser-modal-body .favourites .card-title {
         display: none;
     }
 }
 
-.activitychooser-modal-body .container.favourites a:hover .card {
+body.activitychooser-enabled .activitychooser-modal-body .container.favourites a:hover .card {
     background-color: #f9f9f9;
     border-color: #ec3;
 }
 
-.activitychooser-modal-body .container.favourites a:hover {
+body.activitychooser-enabled .activitychooser-modal-body .container.favourites a:hover {
     text-decoration: none;
 }
 
-.activitychooser-modal-body .toggle-favourite[class*="fa-star"] {
+body.activitychooser-enabled .activitychooser-modal-body .toggle-favourite[class*="fa-star"] {
     font-size: 1.35em;
     font-weight: bold;
 }
 
-.activitychooser-modal-body .toggle-favourite {
+body.activitychooser-enabled .activitychooser-modal-body .toggle-favourite {
     transition: all .1s ease-in-out;
 }
 
-.activitychooser-modal-body .toggle-favourite:not(.spinning):hover {
+body.activitychooser-enabled .activitychooser-modal-body .toggle-favourite:not(.spinning):hover {
     transform: scale(1.5);
 }
 
-.activitychooser-modal-body .toggle-favourite.fa-star-o {
+body.activitychooser-enabled .activitychooser-modal-body .toggle-favourite.fa-star-o {
     color: #bfbfbf;
 }
 
-.activitychooser-modal-body .toggle-favourite.fa-star {
+body.activitychooser-enabled .activitychooser-modal-body .toggle-favourite.fa-star {
     color: #ffc107;
 }
 
-.favourites .card {
+body.activitychooser-enabled .favourites .card {
     border-radius: 2.5px;
 }
 
-.activitychooser-modal-body .card.starred,
+body.activitychooser-enabled .activitychooser-modal-body .card.starred,
 .favourites .card{
     border-color: #ffe0a0;
 }
@@ -71,40 +71,41 @@
 @-webkit-keyframes ajax-spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes ajax-spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-.activitychooser-modal-body .toggle-favourite.spinning {
+body.activitychooser-enabled .activitychooser-modal-body .toggle-favourite.spinning {
     -webkit-animation:ajax-spin 3s linear infinite;
     -moz-animation:ajax-spin 3s linear infinite;
     animation:ajax-spin 3s linear infinite;
 }
 
-.activitychooser-modal-body .full-help-text {
+body.activitychooser-enabled .activitychooser-modal-body .full-help-text {
     display: none;
 }
 
-.activitychooser-modal-body .help-visible .short-help-text {
+body.activitychooser-enabled .activitychooser-modal-body .help-visible .short-help-text {
     display: none;
 }
 
-.activitychooser-modal-body .help-visible .full-help-text {
+body.activitychooser-enabled .activitychooser-modal-body .help-visible .full-help-text {
     display: block;
 }
 
-.activitychooser-modal-body .help-text:hover {
+body.activitychooser-enabled .activitychooser-modal-body .help-text:hover {
     cursor: pointer;
 }
 
-.activitychooser-modal-body .container h2 {
+body.activitychooser-enabled .activitychooser-modal-body .container h2 {
     font-size: 1.2rem;
 }
 
-span.expand-ico, span.collapse-ico {
+body.activitychooser-enabled span.expand-ico,
+body.activitychooser-enabled span.collapse-ico {
     min-width: 1.25rem;
 }
 
 /* Make sure toggles hide the appropriate icon according to state */
-.activitychooser-modal-body a[data-toggle="collapse"][aria-expanded="false"] span.collapse-ico {
+body.activitychooser-enabled .activitychooser-modal-body a[data-toggle="collapse"][aria-expanded="false"] span.collapse-ico {
     display: none;
 }
-.activitychooser-modal-body a[data-toggle="collapse"][aria-expanded="true"] span.expand-ico {
+body.activitychooser-enabled .activitychooser-modal-body a[data-toggle="collapse"][aria-expanded="true"] span.expand-ico {
     display: none;
 }

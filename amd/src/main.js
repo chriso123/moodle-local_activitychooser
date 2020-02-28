@@ -4,6 +4,8 @@ define(["jquery", "core/str", "core/modal_factory", "core/templates", "core/ajax
             var currentSection = 0;
             var mainModal;
 
+            $('body').addClass('activitychooser-enabled');
+
             /**
              * Add or remove a specific moduleId from favourited items.
              * @param moduleId

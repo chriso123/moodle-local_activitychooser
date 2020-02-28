@@ -20,4 +20,10 @@ if ($hassiteconfig) {
     $settings->add(new admin_setting_multiselect_sorted('local_activitychooser/recommended_sorted',
                                                         get_string('recommended', 'local_activitychooser'),
                                                         get_string('recommended_description', 'local_activitychooser')));
+
+    $settings->add(new admin_setting_configcheckbox('local_activitychooser/enabled',
+                                                    get_string('enable', 'localactivitychooser'),
+                                                    get_string('enable_description', 'localactivitychooser'),
+                                                    1
+    ));
 }
