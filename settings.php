@@ -22,8 +22,8 @@ if ($hassiteconfig) {
                                                         get_string('recommended_description', 'local_activitychooser')));
 
     $settings->add(new admin_setting_configcheckbox('local_activitychooser/enabled',
-                                                    get_string('enable', 'localactivitychooser'),
-                                                    get_string('enable_description', 'localactivitychooser'),
+                                                    get_string('enable', 'local_activitychooser'),
+                                                    get_string('enable_description', 'local_activitychooser'),
                                                     1
     ));
 }
