@@ -36,10 +36,5 @@ function xmldb_local_activitychooser_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2019091001, 'local', 'activitychooser');
     }
 
-    
-    if ($oldversion < 2020022800) {
-        set_config('enabled', 1, 'local_activitychooser');
-    }
-
     return true;
 }
